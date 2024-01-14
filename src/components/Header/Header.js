@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
-import { COLORS, WEIGHTS } from '../../constants';
+import { COLORS, QUERIES, WEIGHTS } from '../../constants';
 import Logo from '../Logo';
 import SuperHeader from '../SuperHeader';
 import MobileMenu from '../MobileMenu';
@@ -29,29 +29,41 @@ const Header = () => {
           <NavLink href="/kids">Kids</NavLink>
           <NavLink href="/collections">Collections</NavLink>
         </Nav>
-        <Side />
+        <Side>
+          <MobileMenu
+            isOpen={showMobileMenu}
+            onDismiss={() => setShowMobileMenu(false)}
+            toggle={() => setShowMobileMenu((prev) => !prev)}
+          />
+        </Side>
       </MainHeader>
-
-      <MobileMenu
-        isOpen={showMobileMenu}
-        onDismiss={() => setShowMobileMenu(false)}
-      />
     </header>
   );
 };
 
 const MainHeader = styled.div`
   display: flex;
-  align-items: baseline;
-  padding: 18px 32px;
-  height: 72px;
+  align-items: center;
+  padding: 8px 16px;
+  height: 48px;
   border-bottom: 1px solid ${COLORS.gray[300]};
+
+  @media ${QUERIES.tabletAndUp} {
+    padding: 18px 32px;
+    height: 72px;
+    overflow: auto;
+    overflow-y: hidden;
+  }
 `;
 
 const Nav = styled.nav`
-  display: flex;
-  gap: 48px;
+  display: none;
+  gap: clamp(1rem, 14vw - 6rem, 3rem);
   margin: 0px 48px;
+
+  @media ${QUERIES.tabletAndUp} {
+    display: flex;
+  }
 `;
 
 const Side = styled.div`

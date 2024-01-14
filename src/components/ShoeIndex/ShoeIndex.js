@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
-import { WEIGHTS } from '../../constants';
+import { QUERIES, WEIGHTS } from '../../constants';
 
 import Breadcrumbs from '../Breadcrumbs';
 import Select from '../Select';
@@ -15,14 +15,16 @@ const ShoeIndex = ({ sortId, setSortId }) => {
       <MainColumn>
         <Header>
           <Title>Running</Title>
-          <Select
-            label="Sort"
-            value={sortId}
-            onChange={(ev) => setSortId(ev.target.value)}
-          >
-            <option value="newest">Newest Releases</option>
-            <option value="price">Price</option>
-          </Select>
+          <SelectWrapper>
+            <Select
+              label="Sort"
+              value={sortId}
+              onChange={(ev) => setSortId(ev.target.value)}
+            >
+              <option value="newest">Newest Releases</option>
+              <option value="price">Price</option>
+            </Select>
+          </SelectWrapper>
         </Header>
         <Spacer size={32} />
         <ShoeGrid />
@@ -35,8 +37,10 @@ const ShoeIndex = ({ sortId, setSortId }) => {
             Shoes
           </Breadcrumbs.Crumb>
         </Breadcrumbs>
-        <Spacer size={42} />
-        <ShoeSidebar />
+        <SidebarWithSpacer>
+          <Spacer size={42} />
+          <ShoeSidebar />
+        </SidebarWithSpacer>
       </LeftColumn>
     </Wrapper>
   );
@@ -44,13 +48,19 @@ const ShoeIndex = ({ sortId, setSortId }) => {
 
 const Wrapper = styled.div`
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: column-reverse;
   align-items: baseline;
   gap: 32px;
+
+  @media ${QUERIES.laptopAndUp} {
+    flex-direction: row-reverse;
+  }
 `;
 
 const LeftColumn = styled.div`
-  flex-basis: 248px;
+  @media ${QUERIES.laptopAndUp} {
+    flex-basis: 248px;
+  }
 `;
 
 const MainColumn = styled.div`
@@ -67,5 +77,21 @@ const Title = styled.h2`
   font-size: 1.5rem;
   font-weight: ${WEIGHTS.medium};
 `;
+
+const SidebarWithSpacer = styled.div`
+  display: none;
+
+  @media ${QUERIES.laptopAndUp} {
+    display: revert;
+  }
+`;
+
+const SelectWrapper = styled.div`
+  display: none;
+
+  @media ${QUERIES.tabletAndUp} {
+    display: block;
+  }
+`
 
 export default ShoeIndex;
