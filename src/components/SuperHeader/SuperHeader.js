@@ -26,7 +26,7 @@ const SuperHeader = () => {
 
 const Wrapper = styled.div`
   display: flex;
-  background-color: ${COLORS.gray[900]};
+  background-color: var(--color-gray-900);
   height: 10px;
   padding-left: 32px;
   padding-right: 32px;
@@ -41,7 +41,7 @@ const Content = styled.div`
   align-items: center;
   gap: 24px;
   font-size: 0.875rem;
-  color: ${COLORS.gray[300]};
+  color: var(--color-gray-300);
 
   @media ${QUERIES.laptopAndUp} {
     display: flex;
@@ -49,7 +49,7 @@ const Content = styled.div`
 `
 
 const MarketingMessage = styled.span`
-  color: ${COLORS.white};
+  color: white;
   margin-right: auto;
 `;
 
